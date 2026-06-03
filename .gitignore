@@ -4,17 +4,49 @@ Thumbs.db
 .vscode/
 .idea/
 
-# Python
+# Python bytecode and caches
 __pycache__/
 *.py[cod]
+*$py.class
 .pytest_cache/
 .mypy_cache/
 .ruff_cache/
-.venv/
-venv/
+.cache/
 
-# Jupyter
+# Python environments and packaging
+.Python
+.venv/
+env/
+venv/
+ENV/
+build/
+dist/
+downloads/
+wheels/
+*.egg-info/
+*.egg
+MANIFEST
+
+# Test / coverage outputs
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+coverage.xml
+*.cover
+*.py.cover
+
+# Logs and local config
+*.log
+.env
+.envrc
+local_settings.py
+
+# Jupyter / IPython
 .ipynb_checkpoints/
+profile_default/
+ipython_config.py
 
 # ArcGIS local/cache files
 *.lock
