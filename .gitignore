@@ -1,0 +1,54 @@
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# ArcGIS local/cache files
+*.lock
+*.sr.lock
+*.freelist
+*.gdbindexes
+*.atx
+*.spx
+*.aux.xml
+*.ovr
+*.tfw
+*.jgw
+*.pgw
+
+# ArcGIS project backups / scratch work
+scratch/
+temp/
+tmp/
+cache/
+.backups/
+*.bak
+
+# Large or local-only GIS data
+data/raw/
+data/downloads/
+data/cache/
+*.zip
+*.7z
+*.rar
+
+# Generated outputs
+outputs/
+exports/
+*.pdf
+*.tif
+*.tiff
+
