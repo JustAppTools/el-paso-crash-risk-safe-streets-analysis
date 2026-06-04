@@ -68,6 +68,8 @@ https://justapptools.github.io/el-paso-crash-risk-safe-streets-analysis/
 
 See [docs/github-pages.md](docs/github-pages.md) for hosting and enablement notes.
 
+For a new repository, GitHub Pages must be enabled once in **Settings > Pages** with **Source: GitHub Actions** before the deploy workflow can publish the site.
+
 Run it locally from the repository root:
 
 ```powershell

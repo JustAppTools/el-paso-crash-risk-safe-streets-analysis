@@ -12,13 +12,19 @@ https://justapptools.github.io/el-paso-crash-risk-safe-streets-analysis/
 
 ## Enable Pages
 
-If the first deploy does not automatically create the site:
+The first workflow run may fail with `Get Pages site failed` if GitHub Pages has not been enabled yet. That is expected for a new repository and requires a one-time repository setting change by an owner/admin.
 
 1. Open the repository on GitHub.
 2. Go to **Settings**.
 3. Go to **Pages**.
 4. Under **Build and deployment**, set **Source** to **GitHub Actions**.
 5. Run the **Deploy dashboard to GitHub Pages** workflow again, or push another change to `main`.
+
+Workflow page:
+
+```text
+https://github.com/JustAppTools/el-paso-crash-risk-safe-streets-analysis/actions/workflows/deploy-pages.yml
+```
 
 ## What Gets Published
 
@@ -29,4 +35,3 @@ Only the `web/` folder is uploaded as the Pages artifact. That means the hosted 
 - `web/app.js`
 
 The dashboard fetches public ArcGIS REST layers at runtime. Raw crash records and local GIS downloads are not committed or published.
-
