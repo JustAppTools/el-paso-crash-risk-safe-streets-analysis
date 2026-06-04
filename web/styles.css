@@ -264,6 +264,27 @@ input[type="checkbox"] {
   width: 100%;
 }
 
+.leaflet-container {
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+
+.leaflet-tile,
+.leaflet-marker-icon,
+.leaflet-marker-shadow,
+.leaflet-tile-container,
+.leaflet-pane > svg,
+.leaflet-pane > canvas,
+.leaflet-zoom-box,
+.leaflet-image-layer,
+.leaflet-layer {
+  left: 0;
+  position: absolute;
+  top: 0;
+}
+
 .legend {
   background: rgba(255, 255, 255, 0.94);
   border: 1px solid var(--border);
@@ -363,4 +384,3 @@ input[type="checkbox"] {
     left: 12px;
   }
 }
-
