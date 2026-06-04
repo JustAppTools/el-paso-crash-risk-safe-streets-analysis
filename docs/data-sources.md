@@ -13,6 +13,19 @@ This page tracks candidate datasets for the El Paso Crash Risk & Safe Streets An
 | City of El Paso | Collision Landscape Summary | Baseline crash trend and KSI analysis for city-managed roads. Useful for validation and methodology comparison. | https://www.elpasotexas.gov/assets/Documents/CoEP/Vision-Zero/Collision-Landscape-Summary_forCity.pdf |
 | City of El Paso | KSI Crashes Map | Published KSI crash map and summary. Useful for validation and final narrative context. | https://www.elpasotexas.gov/assets/Documents/CoEP/Vision-Zero/Documents/Maps/KSI-Crashes-2015-2021-Vision-Zero-El-Paso.pdf |
 
+## Public Vision Zero Web Map Services
+
+The interactive web output uses public ArcGIS REST layers referenced by El Paso Vision Zero's public Experience/Dashboard configuration. These services provide the first working visual output while a separate TxDOT CRIS request/export remains available for deeper ArcGIS Pro analysis.
+
+| Layer | Geometry | Verified count | Use | Feature service |
+| --- | --- | ---: | --- | --- |
+| El Paso Collisions | Point | 19,693 | Collision density, KSI points, vulnerable-road-user filtering, and summary metrics | https://devapps.fehrandpeers.com/devgis/rest/services/DA/El_Paso_Dashboard_Data/FeatureServer/1 |
+| City Boundary | Polygon | 1 | Study-area frame | https://devapps.fehrandpeers.com/devgis/rest/services/DA/El_Paso_Dashboard_Data/FeatureServer/2 |
+| HIN - Motor Vehicles | Polyline | 1,666 | Vehicle High Injury Network | https://devapps.fehrandpeers.com/devgis/rest/services/DA/El_Paso_Dashboard_Data/FeatureServer/7 |
+| HIN - Bike/Ped | Polyline | 1,456 | Bicycle/pedestrian High Injury Network | https://devapps.fehrandpeers.com/devgis/rest/services/DA/El_Paso_Dashboard_Data/FeatureServer/8 |
+| Alta EJ Index | Polygon | 435 | Optional equity-context overlay | https://devapps.fehrandpeers.com/devgis/rest/services/DA/El_Paso_Dashboard_Data/FeatureServer/11 |
+| Predictive Modeling Network | Polyline | 26,522 | Optional systemic-risk network overlay | https://devapps.fehrandpeers.com/devgis/rest/services/DA/El_Paso_Predictive_Modeling/FeatureServer/0 |
+
 ## City of El Paso GIS Layers
 
 Candidate layers from City of El Paso Open Data / ArcGIS services:
@@ -46,4 +59,3 @@ City source page:
 - Store raw downloads in `data/raw/`, which is ignored by Git.
 - Store cleaned public analysis extracts in `data/processed/` only when they are lightweight and safe to publish.
 - Final maps, screenshots, and summary tables can be published when they avoid sensitive record-level detail.
-

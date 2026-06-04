@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>El Paso Crash Risk & Safe Streets Analysis</title>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIINfQGfN7tHmx6i6GmU0u3Uf+Z5n9QeX5Q="
+      crossorigin=""
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="side-panel" aria-label="Analysis controls and summary">
+        <header class="project-header">
+          <p class="kicker">El Paso, Texas</p>
+          <h1>Crash Risk & Safe Streets Analysis</h1>
+          <p class="source-note">Public Vision Zero layers, City Open Data context, and safe-streets screening.</p>
+        </header>
+
+        <section class="status-band" aria-live="polite">
+          <span class="status-dot" id="statusDot"></span>
+          <span id="statusText">Loading public safety layers...</span>
+        </section>
+
+        <section class="metric-grid" aria-label="Current filtered metrics">
+          <article class="metric">
+            <span class="metric-label">Crashes</span>
+            <strong id="metricCrashes">--</strong>
+          </article>
+          <article class="metric">
+            <span class="metric-label">KSI</span>
+            <strong id="metricKsi">--</strong>
+          </article>
+          <article class="metric">
+            <span class="metric-label">Bike/Ped</span>
+            <strong id="metricVru">--</strong>
+          </article>
+          <article class="metric">
+            <span class="metric-label">Fatal</span>
+            <strong id="metricFatal">--</strong>
+          </article>
+        </section>
+
+        <section class="control-group" aria-label="Filters">
+          <label>
+            <span>Year</span>
+            <select id="yearFilter">
+              <option value="all">All years</option>
+            </select>
+          </label>
+
+          <label>
+            <span>Crash type</span>
+            <select id="modeFilter">
+              <option value="all">All crashes</option>
+              <option value="ksi">KSI only</option>
+              <option value="vru">Bike/Ped only</option>
+              <option value="fatal">Fatal only</option>
+            </select>
+          </label>
+        </section>
+
+        <section class="control-group layer-controls" aria-label="Map layers">
+          <label><input type="checkbox" data-layer-toggle="heat" checked /> Crash density</label>
+          <label><input type="checkbox" data-layer-toggle="ksi" checked /> KSI points</label>
+          <label><input type="checkbox" data-layer-toggle="vru" checked /> Bike/Ped crashes</label>
+          <label><input type="checkbox" data-layer-toggle="mvHin" checked /> Vehicle HIN</label>
+          <label><input type="checkbox" data-layer-toggle="bpHin" checked /> Bike/Ped HIN</label>
+          <label><input type="checkbox" data-layer-toggle="predictive" /> Predictive network</label>
+          <label><input type="checkbox" data-layer-toggle="equity" /> Equity/DAC areas</label>
+          <label><input type="checkbox" data-layer-toggle="context" /> Schools, transit, bike lanes</label>
+        </section>
+
+        <section class="corridor-list" aria-label="Top streets by filtered crashes">
+          <div class="section-title">
+            <h2>Top Streets</h2>
+            <span id="streetSubtitle">Filtered crash count</span>
+          </div>
+          <ol id="topStreetList"></ol>
+        </section>
+
+        <footer class="panel-footer">
+          <span id="lastUpdated">Live ArcGIS REST services</span>
+        </footer>
+      </section>
+
+      <section class="map-stage" aria-label="Interactive crash risk map">
+        <div id="map"></div>
+        <div class="legend" aria-label="Map legend">
+          <div><span class="swatch heat"></span>Crash density</div>
+          <div><span class="swatch ksi"></span>KSI crash</div>
+          <div><span class="swatch vru"></span>Bike/Ped crash</div>
+          <div><span class="line-swatch vehicle"></span>Vehicle HIN</div>
+          <div><span class="line-swatch bikeped"></span>Bike/Ped HIN</div>
+        </div>
+      </section>
+    </main>
+
+    <script
+      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+      crossorigin=""
+    ></script>
+    <script src="https://unpkg.com/leaflet.heat@0.2.0/dist/leaflet-heat.js"></script>
+    <script src="./app.js"></script>
+  </body>
+</html>

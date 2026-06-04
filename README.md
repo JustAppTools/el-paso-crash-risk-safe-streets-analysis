@@ -49,9 +49,30 @@ See [docs/arcgis-pro-workflow.md](docs/arcgis-pro-workflow.md) for the ArcGIS Pr
 ├── data/                  # Data storage notes; raw data is not committed
 ├── docs/                  # Project plan, data sources, and methodology
 ├── scripts/               # Small validation and processing helpers
+├── web/                   # Interactive browser-based project output
 ├── .gitignore
 └── README.md
 ```
+
+## Interactive Output
+
+The first interactive project output is in [web/index.html](web/index.html). It uses public ArcGIS REST services at runtime to map collision density, KSI points, vulnerable-road-user crashes, High Injury Network segments, predictive safety network context, equity areas, schools, transit stops, and bike lanes.
+
+![Initial safe-streets preview](docs/assets/initial-safe-streets-preview.png)
+
+Run it locally from the repository root:
+
+```powershell
+python -m http.server 5173
+```
+
+Then open:
+
+```text
+http://localhost:5173/web/
+```
+
+The local preview server for this workspace is currently running at that URL.
 
 ## Status
 
