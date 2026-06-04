@@ -30,6 +30,7 @@ Secondary context may include El Paso County and the El Paso MPO boundary where 
 
 See [docs/data-sources.md](docs/data-sources.md) for source links and layer notes.
 See [docs/cris-request-checklist.md](docs/cris-request-checklist.md) for the recommended TxDOT CRIS crash-data request.
+See [docs/arcgis-pro-workflow.md](docs/arcgis-pro-workflow.md) for the ArcGIS Pro import and analysis workflow.
 
 ## Planned Analysis
 

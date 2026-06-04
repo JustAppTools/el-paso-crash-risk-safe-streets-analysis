@@ -62,6 +62,9 @@ ipython_config.py
 *.pgw
 
 # ArcGIS project backups / scratch work
+arcgis/
+*.aprx
+*.gdb/
 scratch/
 temp/
 tmp/
@@ -83,4 +86,3 @@ exports/
 *.pdf
 *.tif
 *.tiff
-
