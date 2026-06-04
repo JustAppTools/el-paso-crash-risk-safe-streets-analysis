@@ -29,6 +29,7 @@ Secondary context may include El Paso County and the El Paso MPO boundary where 
 - U.S. Census ACS demographic indicators, if equity analysis is included
 
 See [docs/data-sources.md](docs/data-sources.md) for source links and layer notes.
+See [docs/cris-request-checklist.md](docs/cris-request-checklist.md) for the recommended TxDOT CRIS crash-data request.
 
 ## Planned Analysis
 
@@ -53,9 +54,10 @@ See [docs/data-sources.md](docs/data-sources.md) for source links and layer note
 
 ## Status
 
-Initial project scaffold in progress. No raw crash data is stored in this repository.
+Initial project scaffold is complete. City of El Paso support layers have been downloaded locally into ignored `data/raw/` storage. TxDOT CRIS crash data is still pending.
+
+Verified local City GIS layers are summarized in [data/source-inventory.csv](data/source-inventory.csv).
 
 ## Notes
 
 Crash report details can contain restricted or sensitive information. This project should use public, aggregated, or appropriately redacted crash data and should avoid publishing personally identifying crash-record details.
-

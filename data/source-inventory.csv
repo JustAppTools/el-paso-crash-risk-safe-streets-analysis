@@ -1,0 +1,9 @@
+source,layer,geometry,feature_count,local_path,committed,notes
+City of El Paso Open Data,EPCenterline,Polyline,58650,data/raw/city_open_data/EPCenterline.geojson,no,Street centerline layer downloaded locally for corridor and road-context analysis.
+City of El Paso Open Data,BusStops,Point,3063,data/raw/city_open_data/BusStops.geojson,no,Transit stop layer downloaded locally for vulnerable-user and transit-access context.
+City of El Paso Open Data,BusRoutes,Polyline,479,data/raw/city_open_data/BusRoutes.geojson,no,Transit route layer downloaded locally for corridor context.
+City of El Paso Open Data,BikeLanes,Polyline,1037,data/raw/city_open_data/BikeLanes.geojson,no,Bicycle facility layer downloaded locally for bike-safety gap analysis.
+City of El Paso Open Data,Schools,Point,262,data/raw/city_open_data/Schools.geojson,no,School point layer downloaded locally for school-zone proximity analysis.
+City of El Paso Open Data,Parks,Polygon,396,data/raw/city_open_data/Parks.geojson,no,Park polygon layer downloaded locally for public-destination proximity analysis.
+TxDOT CRIS,Crash extract,TBD,TBD,data/raw/txdot_cris/,no,Pending public CRIS export or request.
+
