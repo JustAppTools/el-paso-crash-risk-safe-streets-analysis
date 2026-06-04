@@ -122,10 +122,21 @@ const map = L.map("map", {
 
 L.control.zoom({ position: "bottomright" }).addTo(map);
 
-L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", {
+L.tileLayer("https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png", {
   attribution:
     '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
   maxZoom: 19,
+}).addTo(map);
+
+map.createPane("labelPane");
+map.getPane("labelPane").style.zIndex = 650;
+map.getPane("labelPane").style.pointerEvents = "none";
+
+L.tileLayer("https://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}{r}.png", {
+  attribution: "",
+  maxZoom: 19,
+  opacity: 0.95,
+  pane: "labelPane",
 }).addTo(map);
 
 const canvasRenderer = L.canvas({ padding: 0.35 });
@@ -452,7 +463,7 @@ async function ensureOptionalLayer(key) {
       outFields:
         "OBJECTID,STREETNAME,CLASS_CLEAN,Network_ID,ColBic_Cnt_Int,ColPed_Cnt_Int,NoBkPed_Cnt_Int,Wtd_ColBic_Int,Wtd_ColPed_Int,Wtd_NoBkPed_Int",
     }).then((data) => {
-      state.layers.predictive = makeLineLayer(data, "#7057a6", 1.5, 0.24);
+      state.layers.predictive = makeLineLayer(data, "#7057a6", 1.25, 0.18);
     });
   }
 
@@ -470,7 +481,7 @@ async function ensureOptionalLayer(key) {
     ]).then(([busStops, schools, bikeLanes]) => {
       state.layers.busStops = makePointLayer(busStops, "#2f6fb2", 2.4);
       state.layers.schools = makePointLayer(schools, "#487b3f", 4);
-      state.layers.bikeLanes = makeLineLayer(bikeLanes, "#f0a23a", 1.5, 0.46);
+      state.layers.bikeLanes = makeLineLayer(bikeLanes, "#f0a23a", 1.25, 0.36);
     });
   }
 
