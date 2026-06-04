@@ -55,6 +55,46 @@ const state = {
     context: false,
   },
   loading: {},
+  activePreset: "overview",
+};
+
+const DEFAULT_TOGGLES = {
+  heat: true,
+  ksi: false,
+  vru: false,
+  mvHin: true,
+  bpHin: true,
+  predictive: false,
+  equity: false,
+  context: false,
+};
+
+const PRESETS = {
+  overview: {
+    title: "Overview mode",
+    text: "Start with crash density and HIN corridors. This keeps the citywide safety pattern readable.",
+    toggles: DEFAULT_TOGGLES,
+  },
+  points: {
+    title: "Crash Points mode",
+    text: "Shows KSI and bike/ped crashes for inspecting individual crash concentrations and overlap.",
+    toggles: { ...DEFAULT_TOGGLES, ksi: true, vru: true },
+  },
+  equity: {
+    title: "Equity context mode",
+    text: "Adds equity/DAC areas to compare safety corridors with disadvantaged-community context.",
+    toggles: { ...DEFAULT_TOGGLES, equity: true },
+  },
+  systemic: {
+    title: "Systemic network mode",
+    text: "Adds predictive and local context layers for deeper screening. Use after the overview pattern is clear.",
+    toggles: { ...DEFAULT_TOGGLES, predictive: true, context: true },
+  },
+  custom: {
+    title: "Custom layer view",
+    text: "Manual layer selections are active. Reduce optional layers if the map starts to feel visually crowded.",
+    toggles: DEFAULT_TOGGLES,
+  },
 };
 
 const el = {
@@ -69,6 +109,8 @@ const el = {
   topStreetList: document.getElementById("topStreetList"),
   streetSubtitle: document.getElementById("streetSubtitle"),
   lastUpdated: document.getElementById("lastUpdated"),
+  insightTitle: document.getElementById("insightTitle"),
+  insightText: document.getElementById("insightText"),
 };
 
 const map = L.map("map", {
@@ -80,8 +122,9 @@ const map = L.map("map", {
 
 L.control.zoom({ position: "bottomright" }).addTo(map);
 
-L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", {
+  attribution:
+    '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
   maxZoom: 19,
 }).addTo(map);
 
@@ -293,7 +336,7 @@ function updateMetrics(features) {
 
   const top = [...byStreet.entries()]
     .sort((a, b) => b[1] - a[1])
-    .slice(0, 6);
+    .slice(0, 4);
 
   el.topStreetList.innerHTML = top
     .map(([street, count]) => `<li><strong>${street}</strong><span class="street-count">${formatNumber(count)} crashes</span></li>`)
@@ -330,7 +373,7 @@ function makePointLayer(data, color, radius) {
       L.circleMarker(latlng, {
         color,
         fillColor: color,
-        fillOpacity: 0.7,
+        fillOpacity: 0.5,
         radius,
         renderer: canvasRenderer,
         weight: 1,
@@ -345,11 +388,31 @@ function makeEquityLayer(data) {
       return {
         color: "#7057a6",
         fillColor: score > 80 ? "#7057a6" : "#9a82c8",
-        fillOpacity: score > 80 ? 0.2 : 0.1,
-        opacity: 0.45,
+        fillOpacity: score > 80 ? 0.12 : 0.06,
+        opacity: 0.32,
         weight: 1,
       };
     },
+  });
+}
+
+function syncControlsFromState() {
+  document.querySelectorAll("[data-layer-toggle]").forEach((input) => {
+    const key = input.dataset.layerToggle;
+    input.checked = Boolean(state.toggles[key]);
+  });
+
+  document.querySelectorAll("[data-preset]").forEach((button) => {
+    button.classList.toggle("active", button.dataset.preset === state.activePreset);
+  });
+
+  const preset = PRESETS[state.activePreset] || PRESETS.overview;
+  el.insightTitle.textContent = preset.title;
+  el.insightText.textContent = preset.text;
+
+  document.querySelectorAll("[data-legend]").forEach((item) => {
+    const key = item.dataset.legend;
+    item.hidden = !Boolean(state.toggles[key]);
   });
 }
 
@@ -377,6 +440,8 @@ function applyLayerVisibility() {
     if (state.toggles.context && !isShown) map.addLayer(layer);
     if (!state.toggles.context && isShown) map.removeLayer(layer);
   });
+
+  syncControlsFromState();
 }
 
 async function ensureOptionalLayer(key) {
@@ -387,7 +452,7 @@ async function ensureOptionalLayer(key) {
       outFields:
         "OBJECTID,STREETNAME,CLASS_CLEAN,Network_ID,ColBic_Cnt_Int,ColPed_Cnt_Int,NoBkPed_Cnt_Int,Wtd_ColBic_Int,Wtd_ColPed_Int,Wtd_NoBkPed_Int",
     }).then((data) => {
-      state.layers.predictive = makeLineLayer(data, "#7057a6", 2, 0.42);
+      state.layers.predictive = makeLineLayer(data, "#7057a6", 1.5, 0.24);
     });
   }
 
@@ -405,7 +470,7 @@ async function ensureOptionalLayer(key) {
     ]).then(([busStops, schools, bikeLanes]) => {
       state.layers.busStops = makePointLayer(busStops, "#2f6fb2", 2.4);
       state.layers.schools = makePointLayer(schools, "#487b3f", 4);
-      state.layers.bikeLanes = makeLineLayer(bikeLanes, "#f0a23a", 2, 0.72);
+      state.layers.bikeLanes = makeLineLayer(bikeLanes, "#f0a23a", 1.5, 0.46);
     });
   }
 
@@ -415,6 +480,10 @@ async function ensureOptionalLayer(key) {
 }
 
 function setupFilters() {
+  Object.assign(state.toggles, DEFAULT_TOGGLES);
+  state.activePreset = "overview";
+  syncControlsFromState();
+
   state.years = [...new Set(state.collisions.map((feature) => feature.properties && feature.properties.year))]
     .filter(Boolean)
     .sort((a, b) => a - b);
@@ -429,10 +498,29 @@ function setupFilters() {
   el.yearFilter.addEventListener("change", updateCrashLayers);
   el.modeFilter.addEventListener("change", updateCrashLayers);
 
+  document.querySelectorAll("[data-preset]").forEach((button) => {
+    button.addEventListener("click", async (event) => {
+      const presetKey = event.currentTarget.dataset.preset;
+      const preset = PRESETS[presetKey] || PRESETS.overview;
+      state.activePreset = presetKey;
+      Object.assign(state.toggles, preset.toggles);
+
+      const optionalKeys = ["predictive", "equity", "context"].filter((key) => state.toggles[key]);
+      if (optionalKeys.length) {
+        setStatus("Loading selected context layers...");
+        await Promise.all(optionalKeys.map((key) => ensureOptionalLayer(key)));
+        setStatus("Ready: live safety layers loaded", "ready");
+      }
+
+      applyLayerVisibility();
+    });
+  });
+
   document.querySelectorAll("[data-layer-toggle]").forEach((input) => {
     input.addEventListener("change", async (event) => {
       const key = event.currentTarget.dataset.layerToggle;
       state.toggles[key] = event.currentTarget.checked;
+      state.activePreset = "custom";
       if (event.currentTarget.checked && ["predictive", "equity", "context"].includes(key)) {
         setStatus(`Loading ${event.currentTarget.parentElement.textContent.trim()}...`);
         await ensureOptionalLayer(key);
@@ -445,6 +533,9 @@ function setupFilters() {
 
 async function initialize() {
   try {
+    Object.assign(state.toggles, DEFAULT_TOGGLES);
+    state.activePreset = "overview";
+    syncControlsFromState();
     setStatus("Loading public safety layers...");
 
     const [boundary, collisions, mvHin, bpHin] =

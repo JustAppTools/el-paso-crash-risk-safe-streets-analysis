@@ -163,6 +163,31 @@ h1 {
   color: #2e2419;
 }
 
+.view-presets {
+  display: grid;
+  gap: 6px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.preset-button {
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: #26333f;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.76rem;
+  font-weight: 800;
+  min-height: 34px;
+  padding: 7px 6px;
+}
+
+.preset-button.active {
+  background: #172638;
+  border-color: #172638;
+  color: #ffffff;
+}
+
 .metric-label {
   color: var(--muted);
   font-size: 0.78rem;
@@ -315,27 +340,35 @@ input[type="checkbox"] {
 
 #topStreetList {
   display: grid;
-  gap: 8px;
-  list-style-position: inside;
+  gap: 0;
+  list-style: none;
   margin: 0;
   padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
 }
 
 #topStreetList li {
   background: #ffffff;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  display: grid;
+  border-bottom: 1px solid #ebefeb;
+  display: flex;
   font-size: 0.84rem;
   gap: 4px;
+  justify-content: space-between;
   line-height: 1.2;
   padding: 9px 11px;
 }
 
+#topStreetList li:last-child {
+  border-bottom: 0;
+}
+
 .street-count {
   color: var(--red);
-  font-size: 0.78rem;
+  font-size: 0.74rem;
   font-weight: 800;
+  white-space: nowrap;
 }
 
 .panel-footer {
@@ -411,6 +444,10 @@ input[type="checkbox"] {
   gap: 8px;
 }
 
+.legend div[hidden] {
+  display: none;
+}
+
 .swatch {
   border-radius: 999px;
   display: inline-block;
@@ -431,6 +468,11 @@ input[type="checkbox"] {
   background: var(--teal);
 }
 
+.swatch.equity {
+  background: rgba(112, 87, 166, 0.45);
+  border: 1px solid #7057a6;
+}
+
 .line-swatch {
   display: inline-block;
   height: 0;
@@ -444,6 +486,14 @@ input[type="checkbox"] {
 
 .line-swatch.bikeped {
   border-top: 4px solid var(--teal);
+}
+
+.line-swatch.predictive {
+  border-top: 4px solid var(--violet);
+}
+
+.line-swatch.context {
+  border-top: 4px solid var(--amber);
 }
 
 .leaflet-popup-content {

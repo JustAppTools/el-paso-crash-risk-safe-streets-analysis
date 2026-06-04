@@ -14,13 +14,9 @@
           <p class="kicker">El Paso, Texas</p>
           <h1>Crash Risk & Safe Streets Analysis</h1>
           <p class="source-note">
-            KSI and vulnerable-road-user risk concentrates along major El Paso corridors, with High Injury Network
-            segments providing the clearest starting point for safe-streets screening.
+            Citywide screening of crash density, High Injury Network corridors, and optional equity/systemic-risk context.
           </p>
           <p class="credit-line">Independent portfolio project by Victor Suarez.</p>
-          <p class="disclaimer-line">
-            Not affiliated with or endorsed by local agencies, data providers, consultants, or regional stakeholders.
-          </p>
         </header>
 
         <section class="status-band" aria-live="polite">
@@ -48,21 +44,28 @@
         </section>
 
         <section class="analysis-note" aria-label="Interpretation note">
-          <strong>Default view:</strong>
-          <span>Crash density plus vehicle and bike/ped HIN. Turn on point layers when inspecting individual crash patterns.</span>
+          <strong id="insightTitle">Overview mode</strong>
+          <span id="insightText">Start with density and HIN corridors. Add points or context layers only when inspecting specific patterns.</span>
         </section>
 
-        <section class="control-group" aria-label="Filters">
+        <section class="view-presets" aria-label="Map view presets">
+          <button class="preset-button active" type="button" data-preset="overview">Overview</button>
+          <button class="preset-button" type="button" data-preset="points">Crash Points</button>
+          <button class="preset-button" type="button" data-preset="equity">Equity</button>
+          <button class="preset-button" type="button" data-preset="systemic">Systemic</button>
+        </section>
+
+        <section class="control-group" aria-label="Filters" autocomplete="off">
           <label>
             <span>Year</span>
-            <select id="yearFilter">
+            <select id="yearFilter" autocomplete="off">
               <option value="all">All years</option>
             </select>
           </label>
 
           <label>
             <span>Crash type</span>
-            <select id="modeFilter">
+            <select id="modeFilter" autocomplete="off">
               <option value="all">All crashes</option>
               <option value="ksi">KSI only</option>
               <option value="vru">Bike/Ped only</option>
@@ -77,14 +80,14 @@
             <span class="summary-hint">Toggle overlays</span>
           </summary>
           <section class="control-group layer-controls" aria-label="Map layers">
-            <label><input type="checkbox" data-layer-toggle="heat" checked /> Crash density</label>
-            <label><input type="checkbox" data-layer-toggle="ksi" /> KSI points</label>
-            <label><input type="checkbox" data-layer-toggle="vru" /> Bike/Ped crashes</label>
-            <label><input type="checkbox" data-layer-toggle="mvHin" checked /> Vehicle HIN</label>
-            <label><input type="checkbox" data-layer-toggle="bpHin" checked /> Bike/Ped HIN</label>
-            <label><input type="checkbox" data-layer-toggle="predictive" /> Predictive network</label>
-            <label><input type="checkbox" data-layer-toggle="equity" /> Equity/DAC areas</label>
-            <label><input type="checkbox" data-layer-toggle="context" /> Schools, transit, bike lanes</label>
+            <label><input type="checkbox" data-layer-toggle="heat" autocomplete="off" checked /> Crash density</label>
+            <label><input type="checkbox" data-layer-toggle="ksi" autocomplete="off" /> KSI points</label>
+            <label><input type="checkbox" data-layer-toggle="vru" autocomplete="off" /> Bike/Ped crashes</label>
+            <label><input type="checkbox" data-layer-toggle="mvHin" autocomplete="off" checked /> Vehicle HIN</label>
+            <label><input type="checkbox" data-layer-toggle="bpHin" autocomplete="off" checked /> Bike/Ped HIN</label>
+            <label><input type="checkbox" data-layer-toggle="predictive" autocomplete="off" /> Predictive network</label>
+            <label><input type="checkbox" data-layer-toggle="equity" autocomplete="off" /> Equity/DAC areas</label>
+            <label><input type="checkbox" data-layer-toggle="context" autocomplete="off" /> Schools, transit, bike lanes</label>
           </section>
         </details>
 
@@ -100,17 +103,24 @@
         <footer class="panel-footer">
           <strong>Made by Victor Suarez.</strong>
           <span id="lastUpdated">Live ArcGIS REST services</span>
+          <span>
+            Independent portfolio project. Not affiliated with, endorsed by, or produced for local agencies, data
+            providers, consultants, or regional stakeholders.
+          </span>
         </footer>
       </section>
 
       <section class="map-stage" aria-label="Interactive crash risk map">
         <div id="map"></div>
         <div class="legend" aria-label="Map legend">
-          <div><span class="swatch heat"></span>Crash density</div>
-          <div><span class="swatch ksi"></span>KSI crash</div>
-          <div><span class="swatch vru"></span>Bike/Ped crash</div>
-          <div><span class="line-swatch vehicle"></span>Vehicle HIN</div>
-          <div><span class="line-swatch bikeped"></span>Bike/Ped HIN</div>
+          <div data-legend="heat"><span class="swatch heat"></span>Crash density</div>
+          <div data-legend="ksi"><span class="swatch ksi"></span>KSI crash</div>
+          <div data-legend="vru"><span class="swatch vru"></span>Bike/Ped crash</div>
+          <div data-legend="mvHin"><span class="line-swatch vehicle"></span>Vehicle HIN</div>
+          <div data-legend="bpHin"><span class="line-swatch bikeped"></span>Bike/Ped HIN</div>
+          <div data-legend="predictive"><span class="line-swatch predictive"></span>Predictive network</div>
+          <div data-legend="equity"><span class="swatch equity"></span>Equity/DAC area</div>
+          <div data-legend="context"><span class="line-swatch context"></span>Context layers</div>
         </div>
       </section>
     </main>
