@@ -60,6 +60,14 @@ The first interactive project output is in [web/index.html](web/index.html). It 
 
 ![Initial safe-streets preview](docs/assets/initial-safe-streets-preview.png)
 
+Planned public dashboard URL:
+
+```text
+https://justapptools.github.io/el-paso-crash-risk-safe-streets-analysis/
+```
+
+See [docs/github-pages.md](docs/github-pages.md) for hosting and enablement notes.
+
 Run it locally from the repository root:
 
 ```powershell
