@@ -140,6 +140,7 @@ L.tileLayer("https://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}{r}.
 }).addTo(map);
 
 const canvasRenderer = L.canvas({ padding: 0.35 });
+let pointResizeTimer;
 
 function setStatus(text, kind = "loading") {
   el.statusText.textContent = text;
@@ -254,6 +255,17 @@ function popupForCollision(feature) {
   `;
 }
 
+function pointRadius(kind, feature) {
+  const zoom = map.getZoom();
+  const zoomScale = Math.max(0.7, Math.min(1.15, zoom / 12));
+
+  if (kind === "ksi") {
+    return (isFatal(feature) ? 4.2 : 3.0) * zoomScale;
+  }
+
+  return 2.6 * zoomScale;
+}
+
 function updateCrashLayers() {
   const features = filteredCollisions();
   const heatPoints = [];
@@ -296,10 +308,10 @@ function updateCrashLayers() {
         L.circleMarker(latlng, {
           color: "#8d1c23",
           fillColor: isFatal(feature) ? "#8d1c23" : "#d9483b",
-          fillOpacity: 0.86,
-          radius: isFatal(feature) ? 6.5 : 5.2,
+          fillOpacity: isFatal(feature) ? 0.74 : 0.58,
+          radius: pointRadius("ksi", feature),
           renderer: canvasRenderer,
-          weight: 1,
+          weight: 0.8,
         }),
       onEachFeature: (feature, layer) => layer.bindPopup(popupForCollision(feature)),
     },
@@ -316,10 +328,10 @@ function updateCrashLayers() {
         L.circleMarker(latlng, {
           color: "#0e5f56",
           fillColor: "#1f9a8a",
-          fillOpacity: 0.82,
-          radius: 4.6,
+          fillOpacity: 0.54,
+          radius: pointRadius("vru", feature),
           renderer: canvasRenderer,
-          weight: 1,
+          weight: 0.8,
         }),
       onEachFeature: (feature, layer) => layer.bindPopup(popupForCollision(feature)),
     },
@@ -571,6 +583,11 @@ async function initialize() {
     state.collisions = collisions.features || [];
     state.layers.mvHin = makeLineLayer(mvHin, "#d9483b", 4, 0.82);
     state.layers.bpHin = makeLineLayer(bpHin, "#1f9a8a", 4, 0.86);
+
+    map.on("zoomend", () => {
+      window.clearTimeout(pointResizeTimer);
+      pointResizeTimer = window.setTimeout(updateCrashLayers, 80);
+    });
 
     setupFilters();
     updateCrashLayers();
