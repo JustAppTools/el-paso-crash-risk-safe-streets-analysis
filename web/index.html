@@ -14,6 +14,7 @@
           <p class="kicker">El Paso, Texas</p>
           <h1>Crash Risk & Safe Streets Analysis</h1>
           <p class="source-note">Public Vision Zero layers, City Open Data context, and safe-streets screening.</p>
+          <p class="credit-line">Made by: Victor Suarez</p>
         </header>
 
         <section class="status-band" aria-live="polite">
@@ -59,16 +60,22 @@
           </label>
         </section>
 
-        <section class="control-group layer-controls" aria-label="Map layers">
-          <label><input type="checkbox" data-layer-toggle="heat" checked /> Crash density</label>
-          <label><input type="checkbox" data-layer-toggle="ksi" checked /> KSI points</label>
-          <label><input type="checkbox" data-layer-toggle="vru" checked /> Bike/Ped crashes</label>
-          <label><input type="checkbox" data-layer-toggle="mvHin" checked /> Vehicle HIN</label>
-          <label><input type="checkbox" data-layer-toggle="bpHin" checked /> Bike/Ped HIN</label>
-          <label><input type="checkbox" data-layer-toggle="predictive" /> Predictive network</label>
-          <label><input type="checkbox" data-layer-toggle="equity" /> Equity/DAC areas</label>
-          <label><input type="checkbox" data-layer-toggle="context" /> Schools, transit, bike lanes</label>
-        </section>
+        <details class="layer-panel" open>
+          <summary>
+            <span>Map Layers</span>
+            <span class="summary-hint">Toggle overlays</span>
+          </summary>
+          <section class="control-group layer-controls" aria-label="Map layers">
+            <label><input type="checkbox" data-layer-toggle="heat" checked /> Crash density</label>
+            <label><input type="checkbox" data-layer-toggle="ksi" checked /> KSI points</label>
+            <label><input type="checkbox" data-layer-toggle="vru" checked /> Bike/Ped crashes</label>
+            <label><input type="checkbox" data-layer-toggle="mvHin" checked /> Vehicle HIN</label>
+            <label><input type="checkbox" data-layer-toggle="bpHin" checked /> Bike/Ped HIN</label>
+            <label><input type="checkbox" data-layer-toggle="predictive" /> Predictive network</label>
+            <label><input type="checkbox" data-layer-toggle="equity" /> Equity/DAC areas</label>
+            <label><input type="checkbox" data-layer-toggle="context" /> Schools, transit, bike lanes</label>
+          </section>
+        </details>
 
         <section class="corridor-list" aria-label="Top streets by filtered crashes">
           <div class="section-title">
@@ -79,7 +86,12 @@
         </section>
 
         <footer class="panel-footer">
+          <strong>Made by Victor Suarez.</strong>
           <span id="lastUpdated">Live ArcGIS REST services</span>
+          <span>
+            Independent portfolio project. Not affiliated with, endorsed by, or produced for local agencies,
+            data providers, consultants, or other regional stakeholders.
+          </span>
         </footer>
       </section>
 
