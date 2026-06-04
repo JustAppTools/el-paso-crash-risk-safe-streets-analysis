@@ -368,7 +368,7 @@ function updateMetrics(features) {
   el.streetSubtitle.textContent = `${formatNumber(features.length)} filtered crashes`;
 }
 
-function makeLineLayer(data, color, weight = 4, opacity = 0.78) {
+function makeLineLayer(data, color, weight = 3, opacity = 0.78, maxWeight = 5.2) {
   return L.geoJSON(data, {
     style: (feature) => {
       const p = feature.properties || {};
@@ -376,7 +376,7 @@ function makeLineLayer(data, color, weight = 4, opacity = 0.78) {
       return {
         color,
         opacity,
-        weight: Math.min(weight + joinCount * 0.18, 10),
+        weight: Math.min(weight + joinCount * 0.06, maxWeight),
       };
     },
     onEachFeature: (feature, layer) => {
@@ -581,8 +581,8 @@ async function initialize() {
     }).addTo(map);
 
     state.collisions = collisions.features || [];
-    state.layers.mvHin = makeLineLayer(mvHin, "#d9483b", 4, 0.82);
-    state.layers.bpHin = makeLineLayer(bpHin, "#1f9a8a", 4, 0.86);
+    state.layers.mvHin = makeLineLayer(mvHin, "#d9483b", 2.6, 0.76, 4.6);
+    state.layers.bpHin = makeLineLayer(bpHin, "#1f9a8a", 2.6, 0.8, 4.6);
 
     map.on("zoomend", () => {
       window.clearTimeout(pointResizeTimer);

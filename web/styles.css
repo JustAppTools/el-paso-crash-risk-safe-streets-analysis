@@ -481,19 +481,19 @@ input[type="checkbox"] {
 }
 
 .line-swatch.vehicle {
-  border-top: 4px solid var(--red);
+  border-top: 3px solid var(--red);
 }
 
 .line-swatch.bikeped {
-  border-top: 4px solid var(--teal);
+  border-top: 3px solid var(--teal);
 }
 
 .line-swatch.predictive {
-  border-top: 4px solid var(--violet);
+  border-top: 3px solid var(--violet);
 }
 
 .line-swatch.context {
-  border-top: 4px solid var(--amber);
+  border-top: 3px solid var(--amber);
 }
 
 .leaflet-popup-content {
