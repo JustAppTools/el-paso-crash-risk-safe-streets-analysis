@@ -38,7 +38,7 @@ body {
 .app-shell {
   background: var(--map-bg);
   display: grid;
-  grid-template-columns: minmax(330px, 370px) minmax(0, 1fr);
+  grid-template-columns: minmax(360px, 420px) minmax(0, 1fr);
 }
 
 .side-panel {
@@ -81,14 +81,21 @@ h1 {
 
 .source-note {
   color: var(--muted);
-  font-size: 0.92rem;
-  line-height: 1.42;
+  font-size: 0.88rem;
+  line-height: 1.38;
 }
 
 .credit-line {
   color: #26333f;
   font-size: 0.84rem;
   font-weight: 800;
+}
+
+.disclaimer-line {
+  color: var(--muted);
+  font-size: 0.74rem;
+  font-weight: 700;
+  line-height: 1.32;
 }
 
 .status-band {
@@ -138,6 +145,22 @@ h1 {
   gap: 2px;
   min-height: 64px;
   padding: 10px;
+}
+
+.analysis-note {
+  background: #fff8ec;
+  border: 1px solid #ead7b7;
+  border-radius: 8px;
+  color: #4c3822;
+  display: grid;
+  font-size: 0.82rem;
+  gap: 3px;
+  line-height: 1.34;
+  padding: 10px 12px;
+}
+
+.analysis-note strong {
+  color: #2e2419;
 }
 
 .metric-label {
@@ -237,7 +260,7 @@ h1 {
   border-bottom: 1px solid #ebefeb;
   display: flex;
   flex-direction: row;
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   gap: 8px;
   justify-content: flex-start;
   min-height: 32px;
@@ -277,8 +300,17 @@ input[type="checkbox"] {
 
 .section-title span {
   color: var(--muted);
-  font-size: 0.76rem;
+  font-size: 0.72rem;
   font-weight: 700;
+  max-width: 155px;
+  text-align: right;
+}
+
+.section-note {
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 700;
+  line-height: 1.35;
 }
 
 #topStreetList {
@@ -294,10 +326,10 @@ input[type="checkbox"] {
   border: 1px solid var(--border);
   border-radius: 8px;
   display: grid;
-  font-size: 0.9rem;
+  font-size: 0.84rem;
   gap: 4px;
   line-height: 1.2;
-  padding: 10px 12px;
+  padding: 9px 11px;
 }
 
 .street-count {
@@ -366,6 +398,11 @@ input[type="checkbox"] {
   padding: 12px;
   position: absolute;
   z-index: 450;
+}
+
+.leaflet-control-zoom {
+  border: 1px solid var(--border) !important;
+  box-shadow: var(--shadow);
 }
 
 .legend div {

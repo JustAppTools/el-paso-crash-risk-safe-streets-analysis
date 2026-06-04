@@ -46,8 +46,8 @@ const state = {
   layers: {},
   toggles: {
     heat: true,
-    ksi: true,
-    vru: true,
+    ksi: false,
+    vru: false,
     mvHin: true,
     bpHin: true,
     predictive: false,
@@ -72,7 +72,7 @@ const el = {
 };
 
 const map = L.map("map", {
-  center: [31.775, -106.45],
+  center: [31.79, -106.43],
   preferCanvas: true,
   zoom: 11,
   zoomControl: false,
@@ -220,15 +220,15 @@ function updateCrashLayers() {
 
   if (state.layers.heat) map.removeLayer(state.layers.heat);
   state.layers.heat = L.heatLayer(heatPoints, {
-    blur: 20,
+    blur: 24,
     gradient: {
-      0.25: "#f0d56b",
+      0.18: "#f0d56b",
       0.55: "#f0a23a",
       0.8: "#d9483b",
       1.0: "#8d1c23",
     },
     max: 1,
-    radius: 18,
+    radius: 22,
   });
 
   if (state.layers.ksi) map.removeLayer(state.layers.ksi);
@@ -310,7 +310,7 @@ function makeLineLayer(data, color, weight = 4, opacity = 0.78) {
       return {
         color,
         opacity,
-        weight: Math.min(weight + joinCount * 0.14, 9),
+        weight: Math.min(weight + joinCount * 0.18, 10),
       };
     },
     onEachFeature: (feature, layer) => {
@@ -354,7 +354,7 @@ function makeEquityLayer(data) {
 }
 
 function applyLayerVisibility() {
-  const layerKeys = ["heat", "ksi", "vru", "mvHin", "bpHin", "predictive", "equity"];
+  const layerKeys = ["heat", "mvHin", "bpHin", "ksi", "vru", "predictive", "equity"];
 
   layerKeys.forEach((key) => {
     const layer = state.layers[key];
@@ -363,6 +363,11 @@ function applyLayerVisibility() {
     const isShown = map.hasLayer(layer);
     if (shouldShow && !isShown) map.addLayer(layer);
     if (!shouldShow && isShown) map.removeLayer(layer);
+  });
+
+  ["mvHin", "bpHin", "ksi", "vru"].forEach((key) => {
+    const layer = state.layers[key];
+    if (layer && map.hasLayer(layer) && layer.bringToFront) layer.bringToFront();
   });
 
   ["schools", "busStops", "bikeLanes"].forEach((key) => {
@@ -463,11 +468,17 @@ async function initialize() {
 
     state.collisions = collisions.features || [];
     state.layers.mvHin = makeLineLayer(mvHin, "#d9483b", 4, 0.82);
-    state.layers.bpHin = makeLineLayer(bpHin, "#1f9a8a", 4, 0.82);
+    state.layers.bpHin = makeLineLayer(bpHin, "#1f9a8a", 4, 0.86);
 
     setupFilters();
     updateCrashLayers();
-    map.fitBounds(state.layers.boundary.getBounds(), { padding: [24, 24] });
+    map.fitBounds(
+      [
+        [31.61, -106.6],
+        [31.96, -106.17],
+      ],
+      { padding: [22, 22] },
+    );
 
     setStatus("Ready: live safety layers loaded", "ready");
     el.lastUpdated.textContent = `${formatNumber(state.collisions.length)} public crash records loaded from Vision Zero services`;

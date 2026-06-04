@@ -13,8 +13,14 @@
         <header class="project-header">
           <p class="kicker">El Paso, Texas</p>
           <h1>Crash Risk & Safe Streets Analysis</h1>
-          <p class="source-note">Public Vision Zero layers, City Open Data context, and safe-streets screening.</p>
-          <p class="credit-line">Made by: Victor Suarez</p>
+          <p class="source-note">
+            KSI and vulnerable-road-user risk concentrates along major El Paso corridors, with High Injury Network
+            segments providing the clearest starting point for safe-streets screening.
+          </p>
+          <p class="credit-line">Independent portfolio project by Victor Suarez.</p>
+          <p class="disclaimer-line">
+            Not affiliated with or endorsed by local agencies, data providers, consultants, or regional stakeholders.
+          </p>
         </header>
 
         <section class="status-band" aria-live="polite">
@@ -39,6 +45,11 @@
             <span class="metric-label">Fatal</span>
             <strong id="metricFatal">--</strong>
           </article>
+        </section>
+
+        <section class="analysis-note" aria-label="Interpretation note">
+          <strong>Default view:</strong>
+          <span>Crash density plus vehicle and bike/ped HIN. Turn on point layers when inspecting individual crash patterns.</span>
         </section>
 
         <section class="control-group" aria-label="Filters">
@@ -67,8 +78,8 @@
           </summary>
           <section class="control-group layer-controls" aria-label="Map layers">
             <label><input type="checkbox" data-layer-toggle="heat" checked /> Crash density</label>
-            <label><input type="checkbox" data-layer-toggle="ksi" checked /> KSI points</label>
-            <label><input type="checkbox" data-layer-toggle="vru" checked /> Bike/Ped crashes</label>
+            <label><input type="checkbox" data-layer-toggle="ksi" /> KSI points</label>
+            <label><input type="checkbox" data-layer-toggle="vru" /> Bike/Ped crashes</label>
             <label><input type="checkbox" data-layer-toggle="mvHin" checked /> Vehicle HIN</label>
             <label><input type="checkbox" data-layer-toggle="bpHin" checked /> Bike/Ped HIN</label>
             <label><input type="checkbox" data-layer-toggle="predictive" /> Predictive network</label>
@@ -79,19 +90,16 @@
 
         <section class="corridor-list" aria-label="Top streets by filtered crashes">
           <div class="section-title">
-            <h2>Top Streets</h2>
-            <span id="streetSubtitle">Filtered crash count</span>
+            <h2>Top Streets By Volume</h2>
+            <span id="streetSubtitle">Filtered crash count, not rate-adjusted</span>
           </div>
+          <p class="section-note">High-volume streets are screening leads, not final risk rankings.</p>
           <ol id="topStreetList"></ol>
         </section>
 
         <footer class="panel-footer">
           <strong>Made by Victor Suarez.</strong>
           <span id="lastUpdated">Live ArcGIS REST services</span>
-          <span>
-            Independent portfolio project. Not affiliated with, endorsed by, or produced for local agencies,
-            data providers, consultants, or other regional stakeholders.
-          </span>
         </footer>
       </section>
 
