@@ -24,23 +24,26 @@ Secondary context may include El Paso County and the El Paso MPO boundary where 
 
 - TxDOT Crash Records Information System (CRIS)
 - City of El Paso Vision Zero materials and dashboard
+- Public El Paso Vision Zero collision and High Injury Network services
 - City of El Paso Open Data / ArcGIS Hub feature services
 - El Paso Metropolitan Planning Organization GIS maps and shapefiles
 - U.S. Census ACS demographic indicators, if equity analysis is included
 
 See [docs/data-sources.md](docs/data-sources.md) for source links and layer notes.
 See [docs/cris-request-checklist.md](docs/cris-request-checklist.md) for the recommended TxDOT CRIS crash-data request.
+See [docs/cris-derived-aggregation.md](docs/cris-derived-aggregation.md) for the safe public crash-summary workflow.
 See [docs/arcgis-pro-workflow.md](docs/arcgis-pro-workflow.md) for the ArcGIS Pro import and analysis workflow.
 
 ## Planned Analysis
 
-1. Acquire crash records for the selected time window from TxDOT CRIS.
+1. Use the public El Paso Vision Zero collision layer for the dashboard and safe aggregate summaries.
 2. Filter and classify crashes by severity, mode, year, and contributing factors.
 3. Identify KSI crashes, pedestrian/bicyclist crashes, and high-injury locations.
 4. Join crash patterns to roads, intersections, transit stops, schools, bike lanes, and parks.
 5. Build corridor/intersection priority scores using crash severity and exposure context.
 6. Compare findings with El Paso Vision Zero maps and published high-injury network material.
-7. Produce final maps, summary charts, and a concise project narrative.
+7. Optionally request/export raw TxDOT CRIS records for deeper ArcGIS Pro work, keeping those files out of Git.
+8. Produce final maps, summary charts, and a concise project narrative.
 
 ## Repository Structure
 
@@ -86,9 +89,11 @@ The local preview server for this workspace is currently running at that URL.
 
 ## Status
 
-Initial project scaffold is complete. City of El Paso support layers have been downloaded locally into ignored `data/raw/` storage. TxDOT CRIS crash data is still pending.
+Initial project scaffold is complete. City of El Paso support layers have been downloaded locally into ignored `data/raw/` storage. The public dashboard uses El Paso Vision Zero collision and HIN services at runtime.
 
-Verified local City GIS layers are summarized in [data/source-inventory.csv](data/source-inventory.csv).
+A safe CRIS-derived aggregation workflow is included in [scripts/build_cris_derived_summaries.py](scripts/build_cris_derived_summaries.py). It queries the public collision layer without geometry and writes only aggregate summaries to `data/processed/cris_derived/` when the public service is reachable. Raw CRIS extracts remain intentionally uncommitted.
+
+Verified local City GIS layers and live/public safety sources are summarized in [data/source-inventory.csv](data/source-inventory.csv).
 
 ## Notes
 

@@ -6,7 +6,10 @@ Start with the City of El Paso boundary for the primary analysis. Use El Paso Co
 
 ## 2. Acquire Crash Records
 
-Use TxDOT CRIS Query to request public crash data for the selected date range and geography.
+Use two crash-data tracks:
+
+- Public dashboard and summary track: query the public El Paso Vision Zero collision layer without geometry for aggregate CRIS-derived summaries.
+- Optional ArcGIS Pro track: use TxDOT CRIS Query to request public crash data for the selected date range and geography.
 
 Suggested initial extract:
 
@@ -23,6 +26,14 @@ Optional focused extracts:
 - Pedalcyclist-involved crashes
 - Speed-involved crashes
 - Alcohol-involved crashes
+
+For the public summary track, run:
+
+```powershell
+python scripts/build_cris_derived_summaries.py
+```
+
+The script writes only aggregate outputs to `data/processed/cris_derived/` and does not save raw crash records.
 
 ## 3. Prepare Crash Data
 
@@ -96,4 +107,3 @@ Target deliverables:
 - Safe-streets priority zone map
 - Data-source and methodology notes
 - Optional ArcGIS Dashboard or StoryMap
-

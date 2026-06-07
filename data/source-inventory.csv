@@ -5,7 +5,8 @@ City of El Paso Open Data,BusRoutes,Polyline,479,data/raw/city_open_data/BusRout
 City of El Paso Open Data,BikeLanes,Polyline,1037,data/raw/city_open_data/BikeLanes.geojson,no,Bicycle facility layer downloaded locally for bike-safety gap analysis.
 City of El Paso Open Data,Schools,Point,262,data/raw/city_open_data/Schools.geojson,no,School point layer downloaded locally for school-zone proximity analysis.
 City of El Paso Open Data,Parks,Polygon,396,data/raw/city_open_data/Parks.geojson,no,Park polygon layer downloaded locally for public-destination proximity analysis.
-TxDOT CRIS,Crash extract,TBD,TBD,data/raw/txdot_cris/,no,Pending public CRIS export or request.
+TxDOT CRIS,Raw crash extract,TBD,TBD,data/raw/txdot_cris/,no,Optional deeper-analysis input; raw CRIS exports remain ignored and should not be committed.
+Public CRIS-derived aggregation,Aggregate crash summaries,Table,TBD,data/processed/cris_derived/,when generated,Safe summary outputs produced by scripts/build_cris_derived_summaries.py from the public Vision Zero collision layer; no raw records or coordinates.
 El Paso Vision Zero / Fehr & Peers,El Paso Collisions,Point,19693,live ArcGIS REST service,no,Public collision layer used by the interactive web output at runtime.
 El Paso Vision Zero / Fehr & Peers,HIN - Motor Vehicles,Polyline,1666,live ArcGIS REST service,no,Public High Injury Network layer used by the interactive web output at runtime.
 El Paso Vision Zero / Fehr & Peers,HIN - Bike/Ped,Polyline,1456,live ArcGIS REST service,no,Public vulnerable-road-user High Injury Network layer used by the interactive web output at runtime.

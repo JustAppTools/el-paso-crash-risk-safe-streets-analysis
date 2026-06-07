@@ -18,4 +18,4 @@ data/
 - Do not publish personally identifying crash-record information.
 - Commit final summary tables only when they are aggregated and safe for public release.
 - Keep large geodatabases, zipped shapefiles, rasters, and exports out of Git unless there is a deliberate reason to publish them.
-
+- Use `data/processed/cris_derived/` for public aggregate crash summaries generated from the Vision Zero collision layer.

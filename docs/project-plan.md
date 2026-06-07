@@ -10,7 +10,8 @@ This repository presents the project as work completed during a September-Decemb
 
 ## Phase 2: Data Acquisition
 
-- Request or export public crash data from TxDOT CRIS.
+- Use the public Vision Zero collision layer for dashboard mapping and aggregate crash summaries.
+- Optionally request or export public crash data from TxDOT CRIS for deeper local ArcGIS Pro analysis.
 - Download City of El Paso feature layers for streets, bus stops, routes, bike lanes, schools, and parks.
 - Collect MPO maps or shapefiles for regional/equity context.
 - Add Census ACS variables if equity analysis is included.
@@ -43,4 +44,3 @@ El Paso Crash Risk & Safe Streets Analysis
 ## Candidate Repository Description
 
 ArcGIS project analyzing El Paso crash risk, high-injury corridors, vulnerable road-user hotspots, and safe-streets priority areas using public transportation and safety data.
-

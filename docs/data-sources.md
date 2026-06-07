@@ -15,7 +15,7 @@ This page tracks candidate datasets for the El Paso Crash Risk & Safe Streets An
 
 ## Public Vision Zero Web Map Services
 
-The interactive web output uses public ArcGIS REST layers referenced by El Paso Vision Zero's public Experience/Dashboard configuration. These services provide the first working visual output while a separate TxDOT CRIS request/export remains available for deeper ArcGIS Pro analysis.
+The interactive web output uses public ArcGIS REST layers referenced by El Paso Vision Zero's public Experience/Dashboard configuration. These services provide the working crash-risk dashboard and the safe aggregate-summary workflow. A separate TxDOT CRIS request/export remains optional for deeper ArcGIS Pro analysis and should stay out of Git.
 
 | Layer | Geometry | Verified count | Use | Feature service |
 | --- | --- | ---: | --- | --- |
@@ -58,4 +58,5 @@ City source page:
 - Do not commit raw CRIS extracts, crash reports, or personally identifying crash-record details.
 - Store raw downloads in `data/raw/`, which is ignored by Git.
 - Store cleaned public analysis extracts in `data/processed/` only when they are lightweight and safe to publish.
+- Store public crash summaries in `data/processed/cris_derived/` only as aggregate tables without coordinates, crash IDs, or case details.
 - Final maps, screenshots, and summary tables can be published when they avoid sensitive record-level detail.
